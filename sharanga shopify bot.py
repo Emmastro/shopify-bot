@@ -48,7 +48,7 @@ random_size = True
 search_delay = 1
 
 # Checkout settings
-email = "email@domain.com"
+email = "emmamurairi@gmail.com"
 fname = "Bill"
 lname = "Nye"
 addy1 = "123 Jolly St"
@@ -59,7 +59,7 @@ country = "Canada"
 postal_code = "M1G1E4"
 phone = "4169671111"
 card_number = "4510000000000000"  # No spaces
-cardholder = "FirstName LastName"
+cardholder = "Emmanuel Murairi"
 exp_m = "12"  # 2 digits
 exp_y = "2017"  # 4 digits
 cvv = "666"  # 3 digits
@@ -338,4 +338,10 @@ payload = {
     "button": ""
     }
 
+
 r = session.post(link, cookies=cj, data=payload, verify=False)
+
+bs = soup(r.text, "html.parser")
+div = bs.find("h1", {"class": "visually-hidden"})
+if div != None:
+    print("Error shipping")
