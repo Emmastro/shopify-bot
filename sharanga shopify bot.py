@@ -36,7 +36,7 @@ import random
 base_url = "https://www.deadstock.ca"  # Don't add a / at the end
 
 # Search settings
-keywords = ["adidas", "cs2"]  # Seperate keywords with a comma
+keywords = ["adidas", "black"]  # Seperate keywords with a comma
 size = "11"
 
 # If a size is sold out, a random size will be chosen instead, as a backup plan
@@ -254,17 +254,22 @@ def submit_customer_info(session, cookie_jar):
 ''' ------------------------------- CODE ------------------------------- '''
 
 # Initialize
+
 session = requests.session()
+
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 product = None
 
+#TODO: Exit the loop if the product is not found, and return NOT FOUND
 # Loop until a product containing all the keywords is found
 while(product == None):
     # Grab all the products on the site
     products = get_products(session)
+
     # Grab the product defined by keywords
     product = keyword_search(session, products, keywords)
-    if(product == None):
+
+    if(product != None):
         time.sleep(search_delay)
 
 # Get the variant ID for the size
